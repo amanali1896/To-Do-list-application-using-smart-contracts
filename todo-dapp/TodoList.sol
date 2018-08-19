@@ -34,4 +34,13 @@ contract TodoList { // declaring the contract
         else 
             lastIds[msg.sender]++; //incrementing it by one
     }
+    // Mark a todo as completed
+    function markTodoAsCompleted(uint256 _todoId) public 
+    onlyOwner(todos[msg.sender][_todoId].owner) { /**this is used to mark if the notes as completed*/
+                                                // if you remember we declared a modifier. now we will access this function
+                                                //only if that modifier gets executed. 
+        require(_todoId < maxAmountOfTodos); /* _todoID is the id of the list  */
+        require(!todos[msg.sender][_todoId].isCompleted); // if the note is not marked as true, then mark it as true
+        todos[msg.sender][_todoId].isCompleted = true;
+    }
 }
